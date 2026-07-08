@@ -65,13 +65,13 @@ export default function Command() {
 function FeedPosts({ feed }: { feed: FeederFeed }) {
   const { data: posts, isLoading, mutate } = useCachedPromise((feedId: number) => getPosts({ feedId }), [feed.id]);
 
-  async function markAsRead(post: FeederPost) {
+  async function setRead(post: FeederPost, read: 0 | 1) {
     try {
-      await mutate(setPostState(post.id, { is_read: 1 }), {
-        optimisticUpdate: (current) => current?.map((p) => (p.id === post.id ? { ...p, is_read: 1 as const } : p)),
+      await mutate(setPostState(post.id, { is_read: read }), {
+        optimisticUpdate: (current) => current?.map((p) => (p.id === post.id ? { ...p, is_read: read } : p)),
       });
     } catch (e) {
-      await showToast({ style: Toast.Style.Failure, title: "Failed to mark as read", message: String(e) });
+      await showToast({ style: Toast.Style.Failure, title: "Failed to update read state", message: String(e) });
     }
   }
 
@@ -100,8 +100,13 @@ function FeedPosts({ feed }: { feed: FeederFeed }) {
           ]}
           actions={
             <ActionPanel>
-              <Action.OpenInBrowser url={post.link} onOpen={() => markAsRead(post)} />
-              {!post.is_read && <Action title="Mark as Read" icon={Icon.Check} onAction={() => markAsRead(post)} />}
+              <Action.OpenInBrowser url={post.link} onOpen={() => setRead(post, 1)} />
+              <Action
+                title={post.is_read ? "Mark as Unread" : "Mark as Read"}
+                icon={post.is_read ? Icon.Circle : Icon.Check}
+                shortcut={{ modifiers: ["cmd"], key: "r" }}
+                onAction={() => setRead(post, post.is_read ? 0 : 1)}
+              />
               <Action
                 title={post.is_starred ? "Unstar" : "Star"}
                 icon={post.is_starred ? Icon.StarDisabled : Icon.Star}

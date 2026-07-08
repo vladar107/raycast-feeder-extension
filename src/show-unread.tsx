@@ -84,7 +84,12 @@ export default function Command() {
                 <ActionPanel>
                   <ActionPanel.Section>
                     <Action.OpenInBrowser url={post.link} onOpen={() => markAsRead(post)} />
-                    <Action title="Mark as Read" icon={Icon.Check} onAction={() => markAsRead(post)} />
+                    <Action
+                      title="Mark as Read"
+                      icon={Icon.Check}
+                      shortcut={{ modifiers: ["cmd"], key: "r" }}
+                      onAction={() => markAsRead(post)}
+                    />
                     <Action
                       title={post.is_starred ? "Unstar" : "Star"}
                       icon={post.is_starred ? Icon.StarDisabled : Icon.Star}
