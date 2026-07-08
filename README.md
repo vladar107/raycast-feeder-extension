@@ -7,6 +7,7 @@ Raycast extension for [feeder.co](https://feeder.co) — read your RSS feeds in 
 - **Show Unread Feeds** — unread posts grouped by feed. Open in browser (auto-marks read), mark as read, star/unstar, mark a feed or everything as read.
 - **Show All Feeds** — all subscriptions with unread badges; drill into a feed's recent posts.
 - **Add RSS Feed** — subscribe to a new feed (prefills the URL from your clipboard).
+- **Open Feeder** — jump to the Feeder reader (feeder.co/reader) in your browser.
 
 ## Setup
 

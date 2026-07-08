@@ -37,6 +37,12 @@
       "title": "Add RSS Feed",
       "description": "Subscribe to new RSS",
       "mode": "view"
+    },
+    {
+      "name": "open-feeder",
+      "title": "Open Feeder",
+      "description": "Open the Feeder reader in your browser",
+      "mode": "no-view"
     }
   ],
   "dependencies": {
