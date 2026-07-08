@@ -23,11 +23,13 @@ The cookie is set with a ~20-year expiry, so this is a one-time setup. It is sto
 
 Uses the [feeder.co REST API](https://github.com/feederco/feeder-api) (`https://feeder.co/1/`): `/posts/unread`, `PATCH /posts/:id` for read/star state, `/feeds`, `/feeds/unread` for counts, and `/feeds/:id/mark-as-read`.
 
-## Development
+## Install (no store needed)
 
 ```sh
 npm install
 npm run dev
 ```
+
+Once Raycast shows the commands, stop the dev server (Ctrl+C) — the extension stays installed permanently as a local extension and keeps running the last build from this folder. Don't move or delete the folder. After changing the code, run `npm run build` (or `npm run dev` again) to update it.
 
 Personal-use extension — cookie auth isn't suitable for the Raycast Store.
