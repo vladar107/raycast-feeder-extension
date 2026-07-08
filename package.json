@@ -10,6 +10,15 @@
     "News"
   ],
   "license": "MIT",
+  "preferences": [
+    {
+      "name": "sessionCookie",
+      "title": "Feeder Session Cookie",
+      "description": "Value of the _feeder.co_session cookie. Log in at feeder.co, then copy it from DevTools → Application → Cookies → https://feeder.co",
+      "type": "password",
+      "required": true
+    }
+  ],
   "commands": [
     {
       "name": "show-unread",
@@ -25,7 +34,7 @@
     },
     {
       "name": "add-rss-feed",
-      "title": "Add RSS Feed.",
+      "title": "Add RSS Feed",
       "description": "Subscribe to new RSS",
       "mode": "view"
     }
