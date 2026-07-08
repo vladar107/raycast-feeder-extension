@@ -2,6 +2,7 @@ import { Action, ActionPanel, Color, Icon, List, showToast, Toast } from "@rayca
 import { getFavicon, useCachedPromise } from "@raycast/utils";
 import { FeederAuthError, getFeeds, getPosts, getUnreadCounts, markFeedAsRead, setPostState } from "./api";
 import { AuthErrorView } from "./auth-error-view";
+import { PostDetail } from "./post-detail";
 import { FeederFeed, FeederPost } from "./types";
 
 export default function Command() {
@@ -101,6 +102,11 @@ function FeedPosts({ feed }: { feed: FeederFeed }) {
           actions={
             <ActionPanel>
               <Action.OpenInBrowser url={post.link} onOpen={() => setRead(post, 1)} />
+              <Action.Push
+                title="Read in Raycast"
+                icon={Icon.AppWindowSidebarRight}
+                target={<PostDetail post={post} onRead={() => setRead(post, 1)} />}
+              />
               <Action
                 title={post.is_read ? "Mark as Unread" : "Mark as Read"}
                 icon={post.is_read ? Icon.Circle : Icon.Check}

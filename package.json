@@ -3,7 +3,7 @@
   "name": "feeder",
   "title": "Feeder",
   "description": "Provide integration with Feeder RSS reader",
-  "icon": "extension-icon.png",
+  "icon": "feeder-icon.png",
   "author": "vladar107",
   "categories": [
     "Applications",
@@ -41,7 +41,8 @@
   ],
   "dependencies": {
     "@raycast/api": "^1.94.4",
-    "@raycast/utils": "^1.17.0"
+    "@raycast/utils": "^1.17.0",
+    "node-html-markdown": "^2.0.0"
   },
   "devDependencies": {
     "@raycast/eslint-config": "^2.0.4",

@@ -94,6 +94,22 @@ export async function markAllAsRead(): Promise<void> {
   await request("/feeds/mark-all-as-read", { method: "POST" });
 }
 
+const HTML_ENTITIES: Record<string, string> = { "&lt;": "<", "&gt;": ">", "&quot;": '"', "&#39;": "'", "&amp;": "&" };
+
+/**
+ * Fetches a post's content from Feeder's public content endpoint. The raw RSS
+ * item HTML is embedded, entity-escaped, in a data-feeder-original-content
+ * attribute of the rendered page.
+ */
+export async function getPostContent(postId: string): Promise<string | undefined> {
+  const response = await fetch(`https://feeder.co/api/post/${postId}.json`);
+  if (!response.ok) return undefined;
+  const data = (await response.json()) as { postcontent?: { html?: string } };
+  const match = data.postcontent?.html?.match(/data-feeder-original-content="([^"]*)"/);
+  if (!match) return undefined;
+  return match[1].replace(/&lt;|&gt;|&quot;|&#39;|&amp;/g, (entity) => HTML_ENTITIES[entity]);
+}
+
 export async function addFeed(url: string): Promise<FeederFeed> {
   const data = await request<{ feed: FeederFeed }>("/feeds", {
     method: "POST",
