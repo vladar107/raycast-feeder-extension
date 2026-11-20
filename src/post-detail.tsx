@@ -40,9 +40,9 @@ export function PostDetail({ post, onRead }: { post: FeederPost; onRead?: () => 
           )}
           {(post.extra?.categories?.length ?? 0) > 0 && (
             <Detail.Metadata.TagList title="Categories">
-              {post.extra?.categories
-                ?.slice(0, 8)
-                .map((category) => <Detail.Metadata.TagList.Item key={category} text={category} />)}
+              {post.extra?.categories?.slice(0, 8).map((category) => (
+                <Detail.Metadata.TagList.Item key={category} text={category} />
+              ))}
             </Detail.Metadata.TagList>
           )}
           <Detail.Metadata.Link title="Link" target={post.link} text="Open original" />
